@@ -1,11 +1,14 @@
 import Link from "next/link";
-import { products, formatPrice } from "@/lib/products";
+import { getActiveProducts } from "@/lib/catalog";
+import { formatPrice } from "@/lib/store";
 import { ProductArt } from "@/components/product-art";
 
 const ticker = ["Malé dawn tempo", "Hulhumalé long run", "Addu atoll 10K", "Sunset strides", "Virtual club, island time"];
 
-export default function Home() {
-  const featured = products.slice(0, 4);
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const featured = (await getActiveProducts()).slice(0, 4);
 
   return (
     <>

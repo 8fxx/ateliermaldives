@@ -11,7 +11,7 @@ const links = [
   { href: "/membership", label: "Membership" },
 ];
 
-export function Header() {
+export function Header({ user }: { user: { firstName: string; staff: boolean } | null }) {
   const { count } = useCart();
   const pathname = usePathname();
 
@@ -32,9 +32,19 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <Link href="/cart" className="text-sm font-medium">
-          Bag ({count})
-        </Link>
+        <div className="flex items-center gap-5 text-sm">
+          {user?.staff && (
+            <Link href="/admin" className="hidden text-mute hover:text-ink sm:inline">
+              Back office
+            </Link>
+          )}
+          <Link href={user ? "/account" : "/login"} className="text-mute hover:text-ink">
+            {user ? user.firstName : "Sign in"}
+          </Link>
+          <Link href="/cart" className="font-medium">
+            Bag ({count})
+          </Link>
+        </div>
       </div>
       <nav className="flex gap-6 overflow-x-auto border-t border-line px-4 py-2 text-sm md:hidden">
         {links.map((l) => (

@@ -1,11 +1,15 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { products, formatPrice } from "@/lib/products";
+import { getActiveProducts } from "@/lib/catalog";
+import { formatPrice } from "@/lib/store";
 import { ProductArt } from "@/components/product-art";
 
 export const metadata: Metadata = { title: "Shop" };
 
-export default function ShopPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ShopPage() {
+  const products = await getActiveProducts();
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-8">
       <p className="eyebrow text-mute">Collection 01 · Equator</p>

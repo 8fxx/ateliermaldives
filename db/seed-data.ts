@@ -1,4 +1,4 @@
-export type Product = {
+export type SeedProduct = {
   slug: string;
   name: string;
   category: "Tops" | "Bottoms" | "Accessories";
@@ -12,7 +12,7 @@ export type Product = {
   badge?: string;
 };
 
-export const products: Product[] = [
+export const seedProducts: SeedProduct[] = [
   {
     slug: "lagoon-singlet",
     name: "Lagoon Singlet",
@@ -87,11 +87,3 @@ export const products: Product[] = [
     palette: ["#e9f1ee", "#0f6e78"],
   },
 ];
-
-export function getProduct(slug: string) {
-  return products.find((p) => p.slug === slug);
-}
-
-export function formatPrice(cents: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(cents / 100);
-}

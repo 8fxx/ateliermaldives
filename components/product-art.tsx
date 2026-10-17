@@ -1,8 +1,8 @@
-import type { Product } from "@/lib/products";
+type ArtProduct = { name: string; category: string; badge: string | null; paletteBg: string; paletteFg: string };
 
 // Typographic stand-in for product photography. Swap for next/image once shoots are done.
-export function ProductArt({ product, large = false }: { product: Product; large?: boolean }) {
-  const [bg, fg] = product.palette;
+export function ProductArt({ product, large = false }: { product: ArtProduct; large?: boolean }) {
+  const { paletteBg: bg, paletteFg: fg } = product;
   return (
     <div
       className="relative flex aspect-[4/5] w-full flex-col justify-between overflow-hidden rounded-2xl p-5"

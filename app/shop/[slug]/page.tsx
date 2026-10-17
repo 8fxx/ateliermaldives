@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { products, getProduct, formatPrice } from "@/lib/products";
+import { getActiveProduct } from "@/lib/catalog";
+import { formatPrice } from "@/lib/store";
 import { ProductArt } from "@/components/product-art";
 import { AddToBag } from "./add-to-bag";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = getProduct((await params).slug);
+  const product = await getActiveProduct((await params).slug);
   return { title: product?.name ?? "Not found", description: product?.description };
 }
 
 export default async function ProductPage({ params }: Props) {
-  const product = getProduct((await params).slug);
+  const product = await getActiveProduct((await params).slug);
   if (!product) notFound();
 
   return (
@@ -31,7 +30,16 @@ export default async function ProductPage({ params }: Props) {
         <p className="mt-2 text-mute">{product.colorway}</p>
         <p className="mt-6 text-2xl">{formatPrice(product.price)}</p>
         <p className="mt-6 max-w-md leading-relaxed">{product.description}</p>
-        <AddToBag slug={product.slug} sizes={product.sizes} />
+        <AddToBag
+          product={{
+            slug: product.slug,
+            name: product.name,
+            price: product.price,
+            paletteBg: product.paletteBg,
+            paletteFg: product.paletteFg,
+          }}
+          variants={product.variants.map((v) => ({ id: v.id, size: v.size, inStock: v.stock > 0 }))}
+        />
         <ul className="mt-10 divide-y divide-line border-y border-line text-sm">
           {product.details.map((d) => (
             <li key={d} className="py-3">
@@ -39,9 +47,7 @@ export default async function ProductPage({ params }: Props) {
             </li>
           ))}
         </ul>
-        <p className="mt-6 text-xs text-mute">
-          Free shipping across the Maldives. International shipping calculated at checkout.
-        </p>
+        <p className="mt-6 text-xs text-mute">Free pickup in Malé. Delivery across the Maldives calculated at checkout.</p>
       </div>
     </section>
   );

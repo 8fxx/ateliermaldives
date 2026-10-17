@@ -1,37 +1,51 @@
 # Atelier Maldives
 
 Running apparel shop + virtual run club with AI-written training plans and a paid monthly membership.
-Next.js 15 (App Router) · Tailwind v4 · Claude (`claude-opus-5-5`) · Stripe.
+Next.js 15 (App Router) · Tailwind v4 · Drizzle ORM + libSQL (SQLite) · Claude (`claude-opus-5-5`).
 
 ## Setup
 
 ```bash
-cp .env.example .env.local   # fill in the keys
+cp .env.example .env.local     # fill in what you need (see below)
 npm install
-npm run dev                  # http://localhost:3000
+npm run db:migrate             # create tables in local.db
+ADMIN_EMAIL=you@example.com ADMIN_PASSWORD='something-long' npm run db:seed   # products + first admin
+npm run dev                    # http://localhost:3000
 ```
 
-- **Claude**: set `ANTHROPIC_API_KEY` (https://platform.claude.com).
-- **Stripe**: create a product "Atelier Pace" with a recurring monthly price and put its `price_...` id in
-  `STRIPE_MEMBERSHIP_PRICE_ID`. For webhooks locally: `stripe listen --forward-to localhost:3000/api/webhooks/stripe`.
-- To try the full plan without Stripe, set `ATELIER_DEV_MEMBER=1` (dev only).
+| Script | What it does |
+| --- | --- |
+| `npm run db:generate` | Create a migration after editing `db/schema.ts` |
+| `npm run db:migrate` | Apply migrations |
+| `npm run db:seed` | Add the starter catalog and the admin from `ADMIN_EMAIL` / `ADMIN_PASSWORD` (safe to re-run) |
+| `npm run user:role -- <email> <customer\|staff\|admin>` | Change someone's role |
+| `npm run db:studio` | Browse the database in Drizzle Studio |
+
+## Roles
+
+- **Customer**: signs up, orders, and sees their order history at `/account`.
+- **Staff** (retail team): back office at `/admin`. Dashboard, orders (status, payment, notes), products and stock, customer list.
+- **Admin** (owner): everything staff can do, plus giving or removing back-office access under *Customers & staff*.
 
 ## How it fits together
 
 | Route | What it does |
 | --- | --- |
-| `/` | Hero, featured merch, run club pitch |
-| `/shop`, `/shop/[slug]` | Catalog from `lib/products.ts`; bag lives in localStorage |
-| `/cart` → `POST /api/checkout` | Stripe Checkout (one-off payment); prices are taken from the server catalog |
-| `/club` | Join form; saves the runner profile in the browser, then opens `/plan` |
-| `/plan` → `POST /api/plan` | Claude writes the plan as structured JSON (`lib/plan.ts` schema). Free: week 1. Members: up to race day (max 16 weeks) |
-| `/membership` → `POST /api/subscribe` | Stripe subscription checkout → `/api/membership/confirm` sets an httpOnly cookie with the subscription id; status is re-checked with Stripe on every plan request |
-| `/api/webhooks/stripe` | Verified webhook endpoint, ready for persisting orders/members |
+| `/shop`, `/shop/[slug]` | Catalog from the database; sold-out sizes are disabled |
+| `/cart` → `/checkout` | Sign-in required. Delivery or free pickup; bank transfer or cash on delivery. The server re-prices from the database and reserves stock in one transaction |
+| `/account`, `/account/orders/[id]` | Order history; bank details shown on unpaid bank-transfer orders |
+| `/admin` | Sales dashboard (paid sales, orders, average order, 14-day chart, best sellers, low stock) |
+| `/admin/orders` | Filter by status / unpaid, search by order number, name or phone. Cancelling returns stock |
+| `/admin/products` | Create and edit products, sizes and stock; hide products from the shop |
+| `/club`, `/plan` → `POST /api/plan` | Claude writes the training plan (free: week 1; members: up to race day) |
+| `/membership` | Stripe subscription. **Placeholder** until the Maldives payment gateway is integrated |
 
 ## Before going live
 
-- Add accounts + a database (e.g. Auth.js/Clerk + Postgres). Profiles and plans are currently per-browser and
-  the membership cookie is per-device.
-- Add a Stripe customer portal link so members can cancel or update their card.
-- Rate-limit `/api/plan` (each call is a paid Claude request).
-- Replace `ProductArt` placeholders with product photography and the hero club stats with real numbers.
+- **Database**: create a hosted libSQL database (e.g. Turso), set `DATABASE_URL` + `DATABASE_AUTH_TOKEN`, run `npm run db:migrate`.
+- **Payments**: integrate the Maldives gateway (BML / MIB) for card payments and the membership; replace the Stripe code in `lib/stripe.ts` and `app/api/{subscribe,membership,webhooks}`.
+- Link memberships to user accounts (they're currently remembered per device by a cookie).
+- Add password reset and order notification emails/SMS.
+- Rate-limit `/api/plan` and the login form.
+- Replace `ProductArt` placeholders with photography and the home page club stats with real numbers.
+- Note: `dev`/`build` use webpack because Turbopack currently fails to bundle the libSQL driver.
