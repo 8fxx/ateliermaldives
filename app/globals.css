@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-sand: #f2efe8;
+  --color-salt: #fbfaf7;
+  --color-ink: #121212;
+  --color-mute: #6b6760;
+  --color-line: #dcd6ca;
+  --color-lagoon: #0f6e78;
+  --color-coral: #e8643c;
+  --font-sans: var(--font-inter-tight);
+  --font-serif: var(--font-instrument-serif);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-sand);
+  color: var(--color-ink);
+}
+
+@utility eyebrow {
+  @apply text-[11px] font-medium uppercase tracking-[0.22em];
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-dark {
+  @apply btn bg-ink text-salt hover:bg-lagoon;
+}
+@utility btn-light {
+  @apply btn border border-ink/20 bg-transparent hover:border-ink;
+}
+
+@utility field {
+  @apply w-full rounded-xl border border-line bg-salt px-4 py-3 text-sm outline-none focus:border-ink;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 30s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
 }
