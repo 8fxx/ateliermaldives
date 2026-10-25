@@ -1,11 +1,13 @@
-# Atelier Maldives — Design
+# EQUATRA — Design
 
 How the site looks, sounds and behaves. Read this before adding a page or component.
 Tokens live in `app/globals.css`; this file explains how to use them.
 
 ## 1. Brand
 
-**Atelier Maldives** makes technical running apparel and runs a virtual run club from the Maldives.
+**EQUATRA** makes technical running apparel and runs a virtual run club from the Maldives.
+The name is coined from *equator*: the Maldives sits just north of it, and the kit is made for equatorial heat.
+Write it **EQUATRA** in legal and plain text, and *Equatra* in the serif wordmark.
 Reference points: Satisfy, Bandit, District Vision, Tracksmith. These brands look editorial and quiet
 rather than sporty and loud.
 

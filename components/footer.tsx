@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cartHref, shopHref } from "@/lib/links";
 
 export function Footer() {
   return (
@@ -14,8 +15,8 @@ export function Footer() {
         </div>
         <div className="space-y-2 text-sm">
           <p className="eyebrow text-salt/50">Shop</p>
-          <Link href="/shop" className="block hover:text-coral">All products</Link>
-          <Link href="/cart" className="block hover:text-coral">Bag</Link>
+          <Link href={shopHref} className="block hover:text-coral">All products</Link>
+          <Link href={cartHref} className="block hover:text-coral">Bag</Link>
         </div>
         <div className="space-y-2 text-sm">
           <p className="eyebrow text-salt/50">Club</p>
@@ -25,7 +26,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-salt/10 px-4 py-6 text-center text-xs text-salt/40">
-        © {new Date().getFullYear()} Atelier Maldives. Malé, Republic of Maldives.
+        © {new Date().getFullYear()} EQUATRA (SP36992026). Malé, Republic of Maldives.
       </div>
     </footer>
   );

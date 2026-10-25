@@ -1,5 +1,5 @@
 {
-  "name": "ateliermaldives",
+  "name": "equatra",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx scripts/seed.ts",
     "db:studio": "drizzle-kit studio",
-    "user:role": "tsx scripts/set-role.ts"
+    "user:role": "tsx scripts/set-role.ts",
+    "shopify:csv": "tsx scripts/shopify-csv.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.135.0",

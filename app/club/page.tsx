@@ -48,13 +48,13 @@ export default function ClubPage() {
   return (
     <section className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-8 lg:grid-cols-5">
       <div className="lg:col-span-2">
-        <p className="eyebrow text-mute">Atelier Maldives Run Club</p>
+        <p className="eyebrow text-mute">Equatra Run Club</p>
         <h1 className="mt-3 font-serif text-6xl leading-none">
           Join the <span className="italic text-lagoon">club</span>.
         </h1>
         <p className="mt-6 max-w-md text-mute">
           Membership of the club is free. Tell our AI coach about your running and it will write your first week of
-          training straight away. Atelier Pace members get the full plan through to race day.
+          training straight away. Equatra Pace members get the full plan through to race day.
         </p>
         <ul className="mt-8 space-y-3 text-sm">
           <li>✺ Weekly virtual club runs, logged anywhere in the world</li>

@@ -13,7 +13,7 @@ const tiers = [
     features: ["Run club membership", "AI coach: first week of your plan", "Pace zones & island tips", "Early access to kit drops"],
   },
   {
-    name: "Atelier Pace",
+    name: "Equatra Pace",
     price: "$12",
     period: "/ month",
     blurb: "For runners with a goal on the calendar.",

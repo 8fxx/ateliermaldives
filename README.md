@@ -1,4 +1,4 @@
-# Atelier Maldives
+# EQUATRA
 
 Running apparel shop + virtual run club with AI-written training plans and a paid monthly membership.
 Next.js 15 (App Router) · Tailwind v4 · Drizzle ORM + libSQL (SQLite) · Claude (`claude-opus-5-5`).
@@ -26,6 +26,12 @@ npm run dev                    # http://localhost:3000
 - **Customer**: signs up, orders, and sees their order history at `/account`.
 - **Staff** (retail team): back office at `/admin`. Dashboard, orders (status, payment, notes), products and stock, customer list.
 - **Admin** (owner): everything staff can do, plus giving or removing back-office access under *Customers & staff*.
+
+## Shopify
+
+Merch moves to Shopify at `shop.equatra.mv`. See [shopify/README.md](shopify/README.md).
+Set `NEXT_PUBLIC_SHOP_URL` and the site's Shop and Bag links point there; `/shop`, `/cart` and `/checkout` redirect.
+`npm run shopify:csv` exports the catalog for Shopify's product import.
 
 ## How it fits together
 

@@ -6,6 +6,7 @@ import { isStaff, requireUser } from "@/lib/auth";
 import { formatPrice, orderNumber } from "@/lib/store";
 import { PaymentBadge, StatusBadge, formatDate } from "@/components/order-bits";
 import { logout } from "../(auth)/actions";
+import { shopHref } from "@/lib/links";
 
 export const metadata: Metadata = { title: "Account" };
 
@@ -40,7 +41,7 @@ export default async function AccountPage() {
       {orders.length === 0 ? (
         <p className="mt-4 text-mute">
           No orders yet.{" "}
-          <Link href="/shop" className="text-ink underline underline-offset-4">
+          <Link href={shopHref} className="text-ink underline underline-offset-4">
             Shop the collection
           </Link>
         </p>

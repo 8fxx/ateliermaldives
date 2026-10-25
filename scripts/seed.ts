@@ -48,7 +48,7 @@ async function main() {
       const key = await scrypt(password, salt, 64);
       await db.insert(schema.users).values({
         email,
-        name: "Atelier Admin",
+        name: "Equatra Admin",
         role: "admin",
         passwordHash: `scrypt$${salt.toString("hex")}$${key.toString("hex")}`,
       });

@@ -45,5 +45,5 @@ export const goalLabels: Record<RunnerProfile["goal"], string> = {
   "general-fitness": "General fitness",
 };
 
-export const PROFILE_STORAGE_KEY = "atelier.runner";
-export const PLAN_STORAGE_KEY = "atelier.plan";
+export const PROFILE_STORAGE_KEY = "equatra.runner";
+export const PLAN_STORAGE_KEY = "equatra.plan";

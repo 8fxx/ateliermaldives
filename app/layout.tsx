@@ -15,9 +15,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: { default: "Atelier Maldives — Run Club & Running Apparel", template: "%s · Atelier Maldives" },
+  title: { default: "Equatra — Run Club & Running Apparel", template: "%s · Equatra" },
   description:
-    "Technical running apparel made for heat, salt and long horizons. Join the virtual Atelier Maldives Run Club and train with an AI coach.",
+    "Technical running apparel made for heat, salt and long horizons. Join the virtual Equatra Run Club and train with an AI coach.",
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

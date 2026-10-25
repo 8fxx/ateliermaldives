@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getActiveProducts } from "@/lib/catalog";
 import { formatPrice } from "@/lib/store";
 import { ProductArt } from "@/components/product-art";
+import { productHref, shopHref } from "@/lib/links";
 
 const ticker = ["Malé dawn tempo", "Hulhumalé long run", "Addu atoll 10K", "Sunset strides", "Virtual club, island time"];
 
@@ -27,7 +28,7 @@ export default async function Home() {
               Running apparel from a nation one metre above the sea, and a run club that meets wherever you are.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link href="/shop" className="btn bg-salt text-ink hover:bg-coral hover:text-salt">
+              <Link href={shopHref} className="btn bg-salt text-ink hover:bg-coral hover:text-salt">
                 Shop the collection
               </Link>
               <Link href="/club" className="btn border border-salt/30 hover:border-salt">
@@ -75,13 +76,13 @@ export default async function Home() {
             <p className="eyebrow text-mute">The kit</p>
             <h2 className="mt-3 font-serif text-5xl">Collection 01</h2>
           </div>
-          <Link href="/shop" className="text-sm underline underline-offset-4">
+          <Link href={shopHref} className="text-sm underline underline-offset-4">
             View all
           </Link>
         </div>
         <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
           {featured.map((p) => (
-            <Link key={p.slug} href={`/shop/${p.slug}`} className="group">
+            <Link key={p.slug} href={productHref(p.slug)} className="group">
               <div className="transition-transform duration-500 group-hover:-translate-y-1">
                 <ProductArt product={p} />
               </div>
@@ -99,7 +100,7 @@ export default async function Home() {
       <section className="mx-auto max-w-7xl px-4 sm:px-8">
         <div className="grid overflow-hidden rounded-3xl bg-lagoon text-salt md:grid-cols-2">
           <div className="p-8 sm:p-14">
-            <p className="eyebrow text-salt/60">Atelier Maldives Run Club</p>
+            <p className="eyebrow text-salt/60">Equatra Run Club</p>
             <h2 className="mt-4 font-serif text-5xl leading-none sm:text-6xl">
               A club with no <span className="italic">start line</span>.
             </h2>
@@ -115,7 +116,7 @@ export default async function Home() {
             {[
               ["01", "Join the club", "A two-minute runner profile: goal, days you can run, current volume."],
               ["02", "Get your AI plan", "Your coach writes week one free, with paces, effort cues and heat tips."],
-              ["03", "Go the distance", "Atelier Pace members unlock the full plan up to race day."],
+              ["03", "Go the distance", "Equatra Pace members unlock the full plan up to race day."],
             ].map(([n, title, body]) => (
               <li key={n} className="flex gap-6 bg-lagoon p-8">
                 <span className="font-serif text-3xl italic text-coral">{n}</span>

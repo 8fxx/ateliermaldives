@@ -35,4 +35,4 @@ export const paymentMethodLabels: Record<PaymentMethod, string> = {
   cash_on_delivery: "Cash on delivery / pickup",
 };
 
-export const PICKUP_LOCATION = process.env.NEXT_PUBLIC_PICKUP_LOCATION ?? "Atelier Maldives studio, Malé";
+export const PICKUP_LOCATION = process.env.NEXT_PUBLIC_PICKUP_LOCATION ?? "EQUATRA studio, Malé";

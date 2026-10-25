@@ -18,11 +18,11 @@ export function siteUrl() {
 }
 
 /**
- * True when the visitor holds an active "Atelier Pace" subscription.
+ * True when the visitor holds an active "Equatra Pace" subscription.
  * The cookie only stores the Stripe subscription id; status is always re-checked with Stripe.
  */
 export async function isMember(): Promise<boolean> {
-  if (process.env.ATELIER_DEV_MEMBER === "1") return true;
+  if (process.env.EQUATRA_DEV_MEMBER === "1") return true;
 
   const stripe = getStripe();
   const subscriptionId = (await cookies()).get(MEMBER_COOKIE)?.value;

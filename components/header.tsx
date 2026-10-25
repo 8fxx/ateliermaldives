@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "./cart";
+import { SHOP_URL, cartHref, shopHref } from "@/lib/links";
 
 const links = [
-  { href: "/shop", label: "Shop" },
+  { href: shopHref, label: "Shop" },
   { href: "/club", label: "Run Club" },
   { href: "/plan", label: "My Plan" },
   { href: "/membership", label: "Membership" },
@@ -19,7 +20,7 @@ export function Header({ user }: { user: { firstName: string; staff: boolean } |
     <header className="sticky top-0 z-40 border-b border-line bg-sand/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-8">
         <Link href="/" className="font-serif text-2xl leading-none tracking-tight">
-          Atelier <span className="italic text-lagoon">Maldives</span>
+          Equa<span className="italic text-lagoon">tra</span>
         </Link>
         <nav className="hidden items-center gap-8 text-sm md:flex">
           {links.map((l) => (
@@ -41,8 +42,8 @@ export function Header({ user }: { user: { firstName: string; staff: boolean } |
           <Link href={user ? "/account" : "/login"} className="text-mute hover:text-ink">
             {user ? user.firstName : "Sign in"}
           </Link>
-          <Link href="/cart" className="font-medium">
-            Bag ({count})
+          <Link href={cartHref} className="font-medium">
+            {SHOP_URL ? "Bag" : `Bag (${count})`}
           </Link>
         </div>
       </div>

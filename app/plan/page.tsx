@@ -94,7 +94,7 @@ function Plan() {
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-8">
       {params.get("welcome") === "1" && (
         <p className="mb-8 rounded-2xl bg-lagoon px-5 py-4 text-sm text-salt">
-          Welcome to Atelier Pace. Your full plan is being written now.
+          Welcome to Equatra Pace. Your full plan is being written now.
         </p>
       )}
       <div className="flex flex-wrap items-end justify-between gap-6">
@@ -189,7 +189,7 @@ function PlanView({ plan, preview }: Stored) {
         <div className="mt-12 overflow-hidden rounded-3xl bg-ink p-8 text-salt sm:p-12">
           <p className="eyebrow text-salt/50">That was week one</p>
           <h2 className="mt-3 font-serif text-5xl">
-            Unlock the full plan with <span className="italic text-coral">Atelier Pace</span>.
+            Unlock the full plan with <span className="italic text-coral">Equatra Pace</span>.
           </h2>
           <p className="mt-4 max-w-xl text-salt/70">
             Every week through to race day, with a taper, pace zones and regeneration whenever your life changes.
